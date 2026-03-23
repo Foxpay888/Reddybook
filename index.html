@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOLO247 | Register</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top, rgba(0,198,255,0.18), transparent 40%),
+    linear-gradient(140deg,#0b0f1a,#111827,#020617);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* ===== PREMIUM FLOATING GLOWS ===== */
+.glow{
+  position:absolute;
+  width:120px;
+  height:120px;
+  background:radial-gradient(circle, rgba(0,198,255,0.25), transparent 70%);
+  border-radius:50%;
+  animation:move 18s linear infinite;
+  filter:blur(10px);
+}
+
+@keyframes move{
+  from{transform:translateY(120vh);}
+  to{transform:translateY(-20vh);}
+}
+
+/* ===== CARD ===== */
+.card{
+  width:90%;
+  max-width:380px;
+  padding:34px 26px;
+  background:rgba(255,255,255,0.10);
+  backdrop-filter:blur(18px);
+  border-radius:20px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.55);
+  text-align:center;
+  z-index:5;
+}
+
+/* LOGO */
+.logo-img{
+  width:180px;
+  max-width:80%;
+  margin-bottom:14px;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+}
+
+.sub{
+  font-size:14px;
+  opacity:0.9;
+  margin-bottom:26px;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  outline:none;
+  font-size:15px;
+  margin-bottom:18px;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  color:#fff;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button.loading{
+  opacity:0.8;
+  pointer-events:none;
+}
+
+button.loading span::after{
+  content:"  Please wait...";
+  font-weight:400;
+}
+
+.footer{
+  margin-top:18px;
+  font-size:12px;
+  opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING GLOWS -->
+<script>
+for(let i=0;i<6;i++){
+  let g=document.createElement("div");
+  g.className="glow";
+  g.style.left=Math.random()*100+"%";
+  g.style.animationDuration=(14+Math.random()*10)+"s";
+  g.style.animationDelay=Math.random()*5+"s";
+  document.body.appendChild(g);
+}
+</script>
+
+<div class="card">
+  <img src="logo.png" alt="YOLO247 Logo" class="logo-img">
+
+  <div class="sub">Enter your mobile number</div>
+
+  <form id="leadForm">
+    <input type="tel" id="mobile" placeholder="Mobile number / मोबाइल नंबर"
+           required pattern="[0-9]{10}">
+    <button type="submit" id="submitBtn">
+      <span id="btnText">Submit</span>
+    </button>
+  </form>
+
+  <div class="footer">
+    Our team will call back you soon<br>
+    © All rights reserved
+  </div>
+</div>
+
+<script>
+const FORM_URL = "https://script.google.com/macros/s/AKfycbycUQdlJ4tVrZPJ6W9ubCH9b0Js6jBWbqbw73jmVmmK63MPLsTRNpWCChmkrU3xf4G_ZA/exec";
+const REDIRECT_URL = "https://hosturl.info/TrPABO";
+
+/* Auto redirect if idle */
+setTimeout(()=>{
+  if(document.getElementById("mobile").value.trim()===""){
+    window.location.href = REDIRECT_URL;
+  }
+},5000);
+
+document.getElementById("leadForm").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  let btn = document.getElementById("submitBtn");
+  let btnText = document.getElementById("btnText");
+  let mobile = document.getElementById("mobile").value.trim();
+
+  btn.classList.add("loading");
+  btnText.innerText = "Submitting";
+
+  fetch(FORM_URL,{
+    method:"POST",
+    body:new URLSearchParams({mobile:mobile})
+  })
+  .then(()=>{
+    btnText.innerText = "✅ Submitted";
+    setTimeout(()=>window.location.href = REDIRECT_URL,2000);
+  })
+  .catch(()=>{
+    btnText.innerText = "⚠️ Try again";
+    btn.classList.remove("loading");
+  });
+});
+</script>
+
+</body>
+</html>
