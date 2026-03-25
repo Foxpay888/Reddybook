@@ -44,7 +44,6 @@ body{
   color:#fff;
 }
 
-/* ===== PREMIUM FLOATING GLOWS ===== */
 .glow{
   position:absolute;
   width:120px;
@@ -60,7 +59,6 @@ body{
   to{transform:translateY(-20vh);}
 }
 
-/* ===== CARD ===== */
 .card{
   width:90%;
   max-width:380px;
@@ -73,7 +71,6 @@ body{
   z-index:5;
 }
 
-/* LOGO */
 .logo-img{
   width:180px;
   max-width:80%;
@@ -97,7 +94,6 @@ input{
   margin-bottom:18px;
 }
 
-/* BUTTON */
 button{
   width:100%;
   padding:15px;
@@ -131,7 +127,6 @@ button.loading span::after{
 
 <body>
 
-<!-- FLOATING GLOWS -->
 <script>
 for(let i=0;i<6;i++){
   let g=document.createElement("div");
@@ -166,7 +161,6 @@ for(let i=0;i<6;i++){
 const FORM_URL = "https://script.google.com/macros/s/AKfycbycUQdlJ4tVrZPJ6W9ubCH9b0Js6jBWbqbw73jmVmmK63MPLsTRNpWCChmkrU3xf4G_ZA/exec";
 const REDIRECT_URL = "https://hosturl.link/q7Ws61";
 
-/* Auto redirect if idle */
 setTimeout(()=>{
   if(document.getElementById("mobile").value.trim()===""){
     window.location.href = REDIRECT_URL;
@@ -175,6 +169,9 @@ setTimeout(()=>{
 
 document.getElementById("leadForm").addEventListener("submit",function(e){
   e.preventDefault();
+
+  // 🔥 YE LINE ADD KI GAYI HAI (IMPORTANT)
+  fbq('track', 'Lead');
 
   let btn = document.getElementById("submitBtn");
   let btnText = document.getElementById("btnText");
